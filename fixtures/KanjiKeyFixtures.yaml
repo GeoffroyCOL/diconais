@@ -1,0 +1,12 @@
+App\Entity\KanjiKey:
+  kanjiKey_{1..10}:
+    logo (unique): <sentence()>
+    signification: <sentence()>
+    stroke: <numberBetween(1, 15)>
+    kun: <word()>
+    readOn: <word()>
+    jlpt: <numberBetween(1, 5)>
+    image: <imageProvider()>
+    similars: ["@kanji_1"]
+    examples: <exampleProvider(@kanji_1)>
+    numberKey: <numberBetween(1, 214)>

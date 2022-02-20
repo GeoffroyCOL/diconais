@@ -22,3 +22,9 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\DataFixtures\Faker\Provider\ImageProvider:
+        tags: [ { name: nelmio_alice.faker.provider } ]
+
+    App\DataFixtures\Faker\Provider\ExampleProvider:
+        tags: [ { name: nelmio_alice.faker.provider } ]

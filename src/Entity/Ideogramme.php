@@ -70,7 +70,7 @@ abstract class Ideogramme
     /**
      * Exemples de mots avec ce kanji
      */
-    #[ORM\OneToMany(mappedBy: 'ideogramme', targetEntity: Example::class)]
+    #[ORM\OneToMany(mappedBy: 'ideogramme', targetEntity: Example::class, cascade: ["persist", "remove"])]
     protected Collection $examples;
 
     /**

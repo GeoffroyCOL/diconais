@@ -30,7 +30,7 @@ abstract class Ideogramme
     /**
      * Le kanji associé
      */
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, unique: true)]
     protected string $logo;
 
     #[ORM\Column(type: 'string', length: 255)]

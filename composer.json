@@ -1,4 +1,6 @@
 {
+    "name": "geoffroycol/diconais",
+    "description": "Dictionnaire de kanji",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",

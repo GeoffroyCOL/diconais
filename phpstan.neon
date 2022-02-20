@@ -1,0 +1,11 @@
+parameters:
+	checkGenericClassInNonGenericObjectType: false
+	checkMissingIterableValueType: false
+	level: 9
+	paths:
+		- src
+		- tests
+
+includes:
+	- vendor/phpstan/phpstan/conf/bleedingEdge.neon
+	- vendor/phpstan/phpstan-doctrine/extension.neon

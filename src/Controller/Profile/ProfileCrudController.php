@@ -28,9 +28,14 @@ class ProfileCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')->hideOnForm(),
+            IdField::new('id')->hideOnForm()->hideOnDetail(),
             TextField::new('username')->setLabel('Pseudo')->hideOnForm(),
-            TextField::new('email')->setLabel('Adresse email')
+            TextField::new('email')->setLabel('Adresse email'),
+            TextField::new('plainPassword')
+                ->setLabel('Modifier votre mot de passe')
+                ->onlyWhenUpdating()
+                ->setHelp('Le mot de passe doit contenir au minimum 6 caractères, une majuscule, un nombre et une minuscule')
+            ,
         ];
     }
 

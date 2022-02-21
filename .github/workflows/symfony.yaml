@@ -80,15 +80,15 @@ jobs:
         run: vendor/bin/phpstan analyse
 
       ## —— Tests  ———————————————————————————————————————————————————————————
-      #- name: Load Doctrine fixtures
-      #  run: |
-      #    php bin/console d:d:c --env=test
-      #    php bin/console d:m:m --no-interaction --env=test
-      #    php bin/console hautelook:fixtures:load -q --env=test
-      #  env:
-      #    DATABASE_URL: mysql://root:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony
+      - name: Load Doctrine fixtures
+        run: |
+          php bin/console d:d:c --env=test
+          php bin/console d:m:m --no-interaction --env=test
+          php bin/console hautelook:fixtures:load -q --env=test
+        env:
+          DATABASE_URL: mysql://root:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony
 
-      #- name: Run functionnal and unit tests
-      #  run: vendor/bin/phpunit
-      #  env:
-      #    DATABASE_URL: mysql://root:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony
+      - name: Run functionnal and unit tests
+        run: vendor/bin/phpunit
+        env:
+          DATABASE_URL: mysql://root:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony

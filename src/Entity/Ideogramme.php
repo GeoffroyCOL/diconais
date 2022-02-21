@@ -31,28 +31,28 @@ abstract class Ideogramme
      * Le kanji associé
      */
     #[ORM\Column(type: 'string', length: 255, unique: true)]
-    protected string $logo;
+    protected string $logo = '';
 
     #[ORM\Column(type: 'string', length: 255)]
-    protected string $signification;
+    protected string $signification = '';
 
     /**
      * Le nombre de trait
      */
     #[ORM\Column(type: 'integer')]
-    protected int $stroke;
+    protected int $stroke = 0;
 
     /**
      * La lecture kun : japonaise
      */
     #[ORM\Column(type: 'string', length: 255)]
-    protected string $kun;
+    protected string $kun = '';
 
     /**
      * La lecture ON : sino-japonaise
      */
     #[ORM\Column(type: 'string', length: 255)]
-    protected string $readOn;
+    protected string $readOn = '';
 
     /**
      * L'image du kanji avec la numérotation des traits
@@ -65,7 +65,7 @@ abstract class Ideogramme
      * Le niveau JLPT allant de 1 à 5
      */
     #[ORM\Column(type: 'string', length: 50, nullable: true)]
-    protected ?string $jlpt;
+    protected ?string $jlpt = null;
 
     /**
      * Exemples de mots avec ce kanji
@@ -228,5 +228,10 @@ abstract class Ideogramme
         $this->similars->removeElement($similar);
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->logo;
     }
 }

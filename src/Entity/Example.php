@@ -14,7 +14,7 @@ class Example
     private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private ?string $list;
+    private string $list;
 
     #[ORM\ManyToOne(targetEntity: Ideogramme::class, inversedBy: 'examples')]
     private ?Ideogramme $ideogramme;
@@ -24,7 +24,7 @@ class Example
         return $this->id;
     }
 
-    public function getList(): ?string
+    public function getList(): string
     {
         return $this->list;
     }
@@ -46,5 +46,10 @@ class Example
         $this->ideogramme = $ideogramme;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->list;
     }
 }

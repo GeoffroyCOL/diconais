@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[InheritanceType('JOINED')]
@@ -34,10 +35,21 @@ abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
     protected array $roles = [];
 
     #[ORM\Column(type: 'string')]
+    #[Assert\Regex(
+        pattern: "/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}$/",
+        message: "Votre mot de passe n'est pas au bon format"
+    )]
     protected string $password;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Email]
     protected string $email;
+
+    #[Assert\Regex(
+        pattern: "/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}$/",
+        message: "Votre mot de passe n'est pas au bon format"
+    )]
+    protected ?string $plainPassword = null;
 
     public function getId(): ?int
     {
@@ -105,8 +117,7 @@ abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     public function getEmail(): ?string
@@ -117,6 +128,26 @@ abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of plainPassword
+     */ 
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * Set the value of plainPassword
+     *
+     * @return  self
+     */ 
+    public function setPlainPassword(?string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
 
         return $this;
     }

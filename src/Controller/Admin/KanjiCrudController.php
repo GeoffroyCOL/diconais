@@ -43,8 +43,9 @@ class KanjiCrudController extends IdeogrammeCrudController
     {
         /** @var array $fields */
         $fields = parent::configureFields($pageName);
+
         return array_merge($fields, [
-            AssociationField::new('kanjiKey')->setLabel('Clé')->hideOnIndex()
+            10 => AssociationField::new('kanjiKey')->setLabel('Clé')->hideOnIndex()
         ]);
     }
 }

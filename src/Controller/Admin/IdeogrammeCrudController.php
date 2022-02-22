@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Form\ImageType;
 use App\Entity\Ideogramme;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -10,11 +11,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class IdeogrammeCrudController extends AbstractCrudController
 {
@@ -29,15 +31,23 @@ class IdeogrammeCrudController extends AbstractCrudController
         $adminContext = $entity = $this->getContext();
 
         $fields = [
-            IdField::new('id')->hideOnForm(),
-            TextField::new('logo')->setLabel('Kanji'),
-            TextField::new('signification'),
-            IntegerField::new('stroke')->setLabel('Traits')->hideOnIndex(),
-            TextField::new('kun')->setLabel('Lecteur kun')->hideOnIndex(),
-            TextField::new('readOn')->setLabel('Lecture ON')->hideOnIndex(),
-            IntegerField::new('jlpt')->setLabel('Niveau JLPT'),
-            ArrayField::new('similars')->hideOnIndex()->onlyOnDetail()->setLabel('Kanji similaire'),
-            ArrayField::new('examples')->hideOnIndex()->onlyOnDetail()->setLabel('Exemple de mot'),
+            4 => IdField::new('id')->hideOnForm(),
+            1 => TextField::new('logo')->setLabel('Kanji'),
+            2 => TextField::new('signification'),
+            3 => IntegerField::new('stroke')->setLabel('Traits')->hideOnIndex(),
+            0 => TextField::new('kun')->setLabel('Lecteur kun')->hideOnIndex(),
+            5 => TextField::new('readOn')->setLabel('Lecture ON')->hideOnIndex(),
+            6 => IntegerField::new('jlpt')->setLabel('Niveau JLPT'),
+            7 => ArrayField::new('similars')->hideOnIndex()->onlyOnDetail()->setLabel('Kanji similaire'),
+            8 => ArrayField::new('examples')->hideOnIndex()->onlyOnDetail()->setLabel('Exemple de mot'),
+            9 => ImageField::new('image')
+                ->hideOnIndex()
+                ->hideWhenCreating()
+                ->setUploadDir('public/uploads/ideogrammes')
+                ->setBasePath('uploads/ideogrammes')
+                ->setFormType(ImageType::class),
+            11 => TextField::new('image')
+                ->setFormType(ImageType::class)->onlyOnForms(),
         ];
 
         if (null != $adminContext) {

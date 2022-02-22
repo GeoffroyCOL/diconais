@@ -47,4 +47,21 @@ abstract class Media
 
         return $this;
     }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile): self
+    {
+        $this->imageFile = $imageFile;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->path;
+    }
 }

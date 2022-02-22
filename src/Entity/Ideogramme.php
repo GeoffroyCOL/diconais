@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\IdeogrammeRepository;
+use App\Uploader\Attribute\UploaderField;
 use Doctrine\ORM\Mapping\InheritanceType;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
 
 #[ORM\Entity(repositoryClass: IdeogrammeRepository::class)]
@@ -40,7 +41,7 @@ abstract class Ideogramme
      * Le nombre de trait
      */
     #[ORM\Column(type: 'integer')]
-    protected int $stroke = 0;
+    protected int $stroke = 1;
 
     /**
      * La lecture kun : japonaise
@@ -59,7 +60,8 @@ abstract class Ideogramme
      */
     #[ORM\OneToOne(targetEntity: Image::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    protected Image $image;
+    #[UploaderField(propertyName: 'path')]
+    protected ?Image $image = null;
 
     /**
      * Le niveau JLPT allant de 1 à 5
@@ -79,7 +81,7 @@ abstract class Ideogramme
      * @var Collection
      */
     #[ORM\ManyToMany(targetEntity: self::class)]
-    private Collection $similars;
+    protected Collection $similars;
 
     public function __construct()
     {
@@ -157,7 +159,7 @@ abstract class Ideogramme
         return $this->image;
     }
 
-    public function setImage(Image $image): self
+    public function setImage(?Image $image): self
     {
         $this->image = $image;
 

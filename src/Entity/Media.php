@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping\InheritanceType;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MediaRepository::class)]
 #[InheritanceType('JOINED')]
@@ -29,6 +30,10 @@ abstract class Media
     #[ORM\Column(type: 'string', length: 255)]
     protected string $path;
 
+    #[Assert\Image(
+        maxWidth: 500,
+        maxHeight: 500,
+    )]
     protected ?File $imageFile = null;
 
     public function getId(): ?int

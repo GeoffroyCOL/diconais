@@ -76,6 +76,7 @@ abstract class Ideogramme
     #[ORM\OneToOne(targetEntity: Image::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     #[UploaderField(propertyName: 'path')]
+    #[Assert\Valid]
     protected ?Image $image = null;
 
     /**
@@ -93,6 +94,7 @@ abstract class Ideogramme
      * Exemples de mots avec ce kanji
      */
     #[ORM\OneToMany(mappedBy: 'ideogramme', targetEntity: Example::class, cascade: ["persist", "remove"])]
+    #[Assert\Valid]
     protected Collection $examples;
 
     /**

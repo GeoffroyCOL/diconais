@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ExampleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ExampleRepository::class)]
 class Example
@@ -14,6 +15,7 @@ class Example
     private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
     private string $list;
 
     #[ORM\ManyToOne(targetEntity: Ideogramme::class, inversedBy: 'examples')]

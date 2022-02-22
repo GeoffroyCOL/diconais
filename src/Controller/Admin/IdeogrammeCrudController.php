@@ -14,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class IdeogrammeCrudController extends AbstractCrudController
@@ -36,8 +37,12 @@ class IdeogrammeCrudController extends AbstractCrudController
             TextField::new('kun')->setLabel('Lecteur kun')->hideOnIndex()->setColumns('col-md-5'),
             TextField::new('readOn')->setLabel('Lecture ON')->hideOnIndex()->setColumns('col-md-5'),
             IntegerField::new('jlpt')->setLabel('Niveau JLPT')->setColumns('col-md-2'),
-            ArrayField::new('similars')->hideOnIndex()->onlyOnDetail()->setLabel('Kanji similaire'),
-            //ArrayField::new('examples')->hideOnIndex()->setLabel('Exemple de mot')->setColumns('col-12'),
+
+            AssociationField::new('similars')->hideOnIndex()->hideOnDetail()->setLabel('Kanji similaire')->setColumns('col-md-6'),
+            ArrayField::new('similars')->hideOnIndex()->onlyOnDetail()->setLabel('Kanji similaire')->setColumns('col-md-6'),
+
+            ArrayField::new('examples')->hideOnIndex()->setLabel('Exemple de mot')->setColumns('col-md-6'),
+            
             ImageField::new('image')
                 ->hideOnIndex()
                 ->hideWhenCreating()

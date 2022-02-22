@@ -16,7 +16,7 @@ class Kanji extends Ideogramme
     protected int $id;
 
     #[ORM\ManyToOne(targetEntity: KanjiKey::class)]
-    private ?KanjiKey $kanjiKey;
+    protected ?KanjiKey $kanjiKey;
 
     public function getId(): ?int
     {

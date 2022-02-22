@@ -81,13 +81,13 @@ abstract class Ideogramme
     /**
      * Le niveau JLPT allant de 1 à 5
      */
-    #[ORM\Column(type: 'string', length: 50, nullable: true)]
+    #[ORM\Column(type: 'integer', length: 50, nullable: true)]
     #[Assert\Range(
         min: 1,
         max: 5,
         notInRangeMessage: 'Le niveau du JLPT doit être contenue entre {{ min }} et {{ max }}',
     )]
-    protected ?string $jlpt = null;
+    protected ?int $jlpt = null;
 
     /**
      * Exemples de mots avec ce kanji
@@ -186,12 +186,12 @@ abstract class Ideogramme
         return $this;
     }
 
-    public function getJlpt(): ?string
+    public function getJlpt(): ?int
     {
         return $this->jlpt;
     }
 
-    public function setJlpt(?string $jlpt): self
+    public function setJlpt(?int $jlpt): self
     {
         $this->jlpt = $jlpt;
 

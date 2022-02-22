@@ -36,6 +36,8 @@ class KanjiCrudController extends IdeogrammeCrudController
             ->setEntityLabelInPlural('kanjis')
             ->setPageTitle('detail', 'Consulter un %entity_label_singular%')
             ->setPageTitle('index', 'La liste des %entity_label_plural%')
+            ->setPageTitle('new', 'Ajouter un %entity_label_singular%')
+            ->setPageTitle('edit', 'Modifier %entity_label_singular%')
         ;
     }
 
@@ -43,8 +45,9 @@ class KanjiCrudController extends IdeogrammeCrudController
     {
         /** @var array $fields */
         $fields = parent::configureFields($pageName);
+
         return array_merge($fields, [
-            AssociationField::new('kanjiKey')->setLabel('Clé')->hideOnIndex()
+            AssociationField::new('kanjiKey')->setLabel('Clé')->hideOnIndex()->setColumns('col-md-6')
         ]);
     }
 }

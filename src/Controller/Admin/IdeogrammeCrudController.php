@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Form\ImageType;
 use App\Entity\Ideogramme;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -10,11 +11,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
 class IdeogrammeCrudController extends AbstractCrudController
 {
@@ -30,14 +30,23 @@ class IdeogrammeCrudController extends AbstractCrudController
 
         $fields = [
             IdField::new('id')->hideOnForm(),
-            TextField::new('logo')->setLabel('Kanji'),
-            TextField::new('signification'),
-            IntegerField::new('stroke')->setLabel('Traits')->hideOnIndex(),
-            TextField::new('kun')->setLabel('Lecteur kun')->hideOnIndex(),
-            TextField::new('readOn')->setLabel('Lecture ON')->hideOnIndex(),
-            IntegerField::new('jlpt')->setLabel('Niveau JLPT'),
+            TextField::new('logo')->setLabel('Kanji')->setColumns('col-md-5'),
+            TextField::new('signification')->setColumns('col-md-5'),
+            IntegerField::new('stroke')->setLabel('Traits')->hideOnIndex()->setColumns('col-md-2'),
+            TextField::new('kun')->setLabel('Lecteur kun')->hideOnIndex()->setColumns('col-md-5'),
+            TextField::new('readOn')->setLabel('Lecture ON')->hideOnIndex()->setColumns('col-md-5'),
+            IntegerField::new('jlpt')->setLabel('Niveau JLPT')->setColumns('col-md-2'),
             ArrayField::new('similars')->hideOnIndex()->onlyOnDetail()->setLabel('Kanji similaire'),
-            ArrayField::new('examples')->hideOnIndex()->onlyOnDetail()->setLabel('Exemple de mot'),
+            //ArrayField::new('examples')->hideOnIndex()->setLabel('Exemple de mot')->setColumns('col-12'),
+            ImageField::new('image')
+                ->hideOnIndex()
+                ->hideWhenCreating()
+                ->setUploadDir('public/uploads/ideogrammes')
+                ->setBasePath('uploads/ideogrammes')
+                ->setFormType(ImageType::class)
+                ->setColumns('col-md-6'),
+            TextField::new('image')
+                ->setFormType(ImageType::class)->onlyOnForms()->setColumns('col-md-6'),
         ];
 
         if (null != $adminContext) {

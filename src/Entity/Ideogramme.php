@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\IdeogrammeRepository;
+use App\Uploader\Attribute\UploaderField;
 use Doctrine\ORM\Mapping\InheritanceType;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: IdeogrammeRepository::class)]
 #[InheritanceType('JOINED')]
@@ -20,6 +23,7 @@ use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
     typeProperty: 'discr',
     mapping: ['ideogramme' => 'Ideogramme', 'kanji' => 'Kanji', 'kanjiKey' => 'KanjiKey'])
 ]
+#[UniqueEntity('logo')]
 abstract class Ideogramme
 {
     #[ORM\Id]
@@ -31,27 +35,39 @@ abstract class Ideogramme
      * Le kanji associé
      */
     #[ORM\Column(type: 'string', length: 255, unique: true)]
+    #[Assert\NotBlank]
     protected string $logo = '';
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
     protected string $signification = '';
 
     /**
      * Le nombre de trait
      */
     #[ORM\Column(type: 'integer')]
-    protected int $stroke = 0;
+    #[Assert\NotBlank]
+    #[Assert\Positive(
+        message: "Le nombre de trait ne peut pas être négatif"
+    )]
+    #[Assert\Type(
+        type: "integer",
+        message: "La valeur {{ value }} n'est pas de type {{ type }}",
+    )]
+    protected int $stroke = 1;
 
     /**
      * La lecture kun : japonaise
      */
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
     protected string $kun = '';
 
     /**
      * La lecture ON : sino-japonaise
      */
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
     protected string $readOn = '';
 
     /**
@@ -59,12 +75,18 @@ abstract class Ideogramme
      */
     #[ORM\OneToOne(targetEntity: Image::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    protected Image $image;
+    #[UploaderField(propertyName: 'path')]
+    protected ?Image $image = null;
 
     /**
      * Le niveau JLPT allant de 1 à 5
      */
     #[ORM\Column(type: 'string', length: 50, nullable: true)]
+    #[Assert\Range(
+        min: 1,
+        max: 5,
+        notInRangeMessage: 'Le niveau du JLPT doit être contenue entre {{ min }} et {{ max }}',
+    )]
     protected ?string $jlpt = null;
 
     /**
@@ -79,7 +101,7 @@ abstract class Ideogramme
      * @var Collection
      */
     #[ORM\ManyToMany(targetEntity: self::class)]
-    private Collection $similars;
+    protected Collection $similars;
 
     public function __construct()
     {
@@ -157,7 +179,7 @@ abstract class Ideogramme
         return $this->image;
     }
 
-    public function setImage(Image $image): self
+    public function setImage(?Image $image): self
     {
         $this->image = $image;
 

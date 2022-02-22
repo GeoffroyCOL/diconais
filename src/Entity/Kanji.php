@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\KanjiRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\KanjiRepository;
+use App\Uploader\Attribute\Uploader;
 
 #[ORM\Entity(repositoryClass: KanjiRepository::class)]
+#[Uploader]
 class Kanji extends Ideogramme
 {
     #[ORM\Id]
@@ -14,7 +16,7 @@ class Kanji extends Ideogramme
     protected int $id;
 
     #[ORM\ManyToOne(targetEntity: KanjiKey::class)]
-    private ?KanjiKey $kanjiKey;
+    protected ?KanjiKey $kanjiKey;
 
     public function getId(): ?int
     {

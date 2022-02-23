@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\KanjiKeyRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Uploader\Attribute\Uploader;
+use App\Repository\KanjiKeyRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: KanjiKeyRepository::class)]
 #[UniqueEntity('numberKey')]
+#[Uploader]
 class KanjiKey extends Ideogramme
 {
     #[ORM\Id]

@@ -9,4 +9,4 @@ App\Entity\KanjiKey:
     image: <imageProvider()>
     similars: ["@kanji_1"]
     examples: <exampleProvider(@kanji_1)>
-    numberKey: <numberBetween(1, 214)>
+    numberKey (unique): <numberBetween(1, 214)>

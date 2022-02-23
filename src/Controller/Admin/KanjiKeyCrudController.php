@@ -29,6 +29,8 @@ class KanjiKeyCrudController extends IdeogrammeCrudController
             ->setEntityLabelInSingular('clé')
             ->setEntityLabelInPlural('clés')
             ->setPageTitle('detail', 'Consulter une %entity_label_singular%')
+            ->setPageTitle('new', 'Ajouter une %entity_label_singular%')
+            ->setPageTitle('edit', 'Modifier une %entity_label_singular%')
             ->setPageTitle('index', 'La liste des %entity_label_plural%')
         ;
     }

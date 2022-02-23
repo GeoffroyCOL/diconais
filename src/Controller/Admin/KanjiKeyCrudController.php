@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use App\Controller\Admin\IdeogrammeCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 
 class KanjiKeyCrudController extends IdeogrammeCrudController
 {
@@ -29,7 +30,17 @@ class KanjiKeyCrudController extends IdeogrammeCrudController
             ->setEntityLabelInSingular('clé')
             ->setEntityLabelInPlural('clés')
             ->setPageTitle('detail', 'Consulter une %entity_label_singular%')
+            ->setPageTitle('new', 'Ajouter une %entity_label_singular%')
+            ->setPageTitle('edit', 'Modifier une %entity_label_singular%')
             ->setPageTitle('index', 'La liste des %entity_label_plural%')
+        ;
+    }
+
+    public function configureFilters(Filters $filters): Filters
+    {
+        $filters = parent::configureFilters($filters);
+        return $filters
+            ->add('numberKey')
         ;
     }
 }

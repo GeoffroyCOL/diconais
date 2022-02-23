@@ -6,7 +6,6 @@ use App\Entity\Example;
 use App\Entity\Ideogramme;
 use App\Handler\ExampleHandler;
 use Doctrine\ORM\PersistentCollection;
-use App\Repository\IdeogrammeRepository;
 
 class IdeogrammeHandler
 {

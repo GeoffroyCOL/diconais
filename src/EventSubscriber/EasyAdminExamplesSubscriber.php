@@ -3,10 +3,9 @@
 namespace App\EventSubscriber;
 
 use App\Handler\IdeogrammeHandler;
-use App\Uploader\Attribute\UploaderAttributeReader;
-use App\Uploader\Handler\UploaderHandler;
-use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
+use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 
 class EasyAdminExamplesSubscriber implements EventSubscriberInterface
 {
@@ -18,6 +17,7 @@ class EasyAdminExamplesSubscriber implements EventSubscriberInterface
     {
         return [
             BeforeEntityPersistedEvent::class => ['ideogrammePersist'],
+            BeforeEntityUpdatedEvent::class => ['ideogrammeUpdate'],
         ];
     }
 
@@ -25,5 +25,11 @@ class EasyAdminExamplesSubscriber implements EventSubscriberInterface
     {
         $entity = $event->getEntityInstance();
         $this->ideogrammeHandler->addExamples($entity);
+    }
+
+    public function ideogrammeUpdate(BeforeEntityUpdatedEvent $event): void
+    {
+        $entity = $event->getEntityInstance();
+        $this->ideogrammeHandler->editExamples($entity);
     }
 }

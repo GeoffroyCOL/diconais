@@ -47,6 +47,12 @@ class IdeogrammeHandler
 
         $this->deleteExamplesInIdeogramme();
     }
+
+    public function deleteExample(Ideogramme $ideogramme): void
+    {
+        $this->oldListExamples = $this->exampleHandler->getExamplesByIdeogramme($ideogramme);
+        $this->deleteExamplesInIdeogramme();
+    }
     
     /**
      * isArrayExamples

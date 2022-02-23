@@ -3,6 +3,7 @@
 namespace App\EventSubscriber;
 
 use App\Handler\IdeogrammeHandler;
+use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityDeletedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
@@ -18,6 +19,7 @@ class EasyAdminExamplesSubscriber implements EventSubscriberInterface
         return [
             BeforeEntityPersistedEvent::class => ['ideogrammePersist'],
             BeforeEntityUpdatedEvent::class => ['ideogrammeUpdate'],
+            AfterEntityDeletedEvent::class => ['ideogrammeDelete']
         ];
     }
 
@@ -31,5 +33,11 @@ class EasyAdminExamplesSubscriber implements EventSubscriberInterface
     {
         $entity = $event->getEntityInstance();
         $this->ideogrammeHandler->editExamples($entity);
+    }
+
+    public function ideogrammeDelete(AfterEntityDeletedEvent $event): void
+    {
+        $entity = $event->getEntityInstance();
+        $this->ideogrammeHandler->deleteExample($entity);
     }
 }

@@ -1,0 +1,153 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les kana | {{ parent() }}{% endblock %}
+
+{% block meta %}
+    {{ parent() }}
+    <meta name="description" content="Les kana sont des alphabets de syllabe.Pour être plus précis, on appelle ce genre d'alphabet un syllabaire.
+    Chaque kana correspond à une syllabe, composée d'au moins d'une consonne et d'une voyelle.">
+{% endblock %}
+
+{% block body %}
+<section class="py-md-5">
+    <header class="mb-3">
+        <h1 class="text-primary text-uppercase fw-bold">Les kana</h1>
+    </header>
+
+    <section class="mb-5 pb-md-5">
+        <p>
+            Les <strong>kana</strong> sont des alphabets de syllabe. <br>
+            Pour être plus précis, on appelle ce genre d'alphabet un <a href="https://fr.wikipedia.org/wiki/Syllabaire" target="_blank">syllabaire</a>. <br>
+            Chaque kana correspond à une syllabe, composée d'au moins d'une consonne et d'une voyelle.
+        </p>
+
+        <p class="mb-0">Il existe sous deux formes de kana : </p>
+        <ul>
+            <li>Les <strong>hiragana</strong> : あ / す / も</li> 
+            <li>Les <strong>katakana</strong> : ア / ス / モ</li>
+        </ul>
+
+
+        <p>Chaque forme de <strong>kana</strong> est composée de 46 syllabes, qui sont représentées dans un tableau suivant l'ordre alphabétique Japonais.</p>
+
+        <p class="mb-0">Les tableaux sont à lire : </p>
+        <ul>
+            <li>de haut en base</li>
+            <li>et de droite à gauche</li>
+        </ul>
+
+        <p class="mb-0"> Par convention, lorsque l'on écrit en romaji les différents <strong>kana</strong>, on écrira : </p>
+        <ul>
+            <li><strong>hiragana</strong> en minuscule</li>
+            <li><strong>katakana</strong> en majuscule</li>
+        </ul>
+    </section>
+
+    {# Les hiragana #}
+    <section class="mb-5 pb-md-5">
+        <header class="mb-3">
+            <h2 class="text-secondary text-uppercase h3 fw-bold">Les hiragana</h2>
+        </header>
+
+        <div>
+            <p class="mb-0">Les <strong>hiragana</strong> sont issues de <strong>kanji</strong> en simplifiant l'écriture.</p>
+            <ul>
+                <li>安 a donné あ</li> 
+                <li>加 a donné か</li>
+            </ul>
+
+            <p class="mb-0">Ils sont utilisés pour : </p>
+            <ul>
+                <li>indiquer la fonction grammaticale des mots dans les phrases japonaises : <a href="https://guidedujaponais.fr/particules/" target="_blank">particule</a></li>
+                <li>écrire la terminaison des verbes et adjectif : <a href="https://fr.wikipedia.org/wiki/Okurigana" target="_blank">okurigana</a></li>
+                <li>écrire toute la langue japonaise. Utile lorsque l'on ne connaît pas le <strong>kanji</strong></li>
+            </ul>
+        </div>
+
+        <footer>
+            <a target="_blank" href="{{ asset('uploads/table/hiragana.pdf') }}">Télécharger le tableau des hiragana</a>
+        </footer>
+    </section>
+    {# Les hiragana #}
+
+    {# Les katakana #}
+    <section class="mb-5 pb-md-5">
+        <header class="mb-3">
+            <h2 class="text-secondary text-uppercase h3 fw-bold">Les katakana</h2>
+        </header>
+
+        <div>
+            <p class="mb-0">
+                Un plus angulaire que les <strong>hiragana</strong>.<br>
+                Ils viennent des <strong>kanji</strong> également, mais en prenant une petite partie.
+            </p>
+            <ul>
+                <li>加 à donné カ</li>
+                <li>比 à donné ヒ</li>
+                <li>利 a donné リ</li>
+            </ul>
+
+            <p class="mb-0">Ils sont utilisés pour :</p>
+            <ul>
+                <li>Ecrire les mots étrangers en japonais</li>
+                <li>Mettre l’accent sur certains mots, de manière équivalente à l’usage de l’italique en langue Française.</li>
+            </ul>
+        </div>
+
+        <footer>
+            <a target="_blank" href="{{ asset('uploads/table/katakana.pdf') }}">Télécharger le tableau des katakana</a>
+        </footer>
+    </section>
+    {# Les katakana #}
+
+    <section>
+        <header class="mb-3">
+            <h3 class="text-secondary text-uppercase h5 fw-bold">Les sources</h3>
+        </header>
+
+        <div>
+            <div class="card p-3 mb-4">
+                <h4 class="h6 fw-bold">Sophie Thomas</h4>
+                <ul class="list-group border-0">
+                    <li class="list-group-item border-0 pb-0">
+                        <a  class="link-primary text-decoration-none" 
+                            href="https://cours-de-japonais.com/3-systemes-ecriture-japonais/" 
+                            target="_blank">Les 3 systèmes d’écriture du japonais
+                        </a>
+                    </li>
+                    <li class="list-group-item border-0 pb-0">
+                        <a  class="link-primary text-decoration-none" 
+                            href="https://cours-de-japonais.com/histoire-des-hiragana/" 
+                            target="_blank">L’histoire des hiragana japonais
+                        </a>
+                    </li>
+                    <li class="list-group-item border-0 pb-0">
+                        <a  class="link-primary text-decoration-none" 
+                            href="https://cours-de-japonais.com/apprendre-kana-quiz/"
+                            target="_blank">Apprendre les kana
+                        </a>
+                    </li>
+                </ul>
+            </div>  
+
+            <div class="card p-3">
+                <h4 class="h6 fw-bold">Julien Fontanier</h4>
+                <ul class="list-group border-0">
+                    <li class="list-group-item border-0 pb-0">
+                        <a  class="link-primary text-decoration-none" 
+                            href="https://www.youtube.com/watch?v=_PCJnq_-oT8" 
+                            target="_blank">Présentation des hiragana
+                        </a>
+                    </li>
+                    <li class="list-group-item border-0 pb-0">
+                        <a  class="link-primary text-decoration-none" 
+                            href="https://www.youtube.com/watch?v=xnjpl0mNQOQ" 
+                            target="_blank">Présentation des katakana
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</section>
+{% endblock %}

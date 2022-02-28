@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue ! | {{ parent() }}{% endblock %}
+
+{% block body %}
+<section class="py-md-5">
+    <header class="mb-3">
+        <h1 class="text-primary text-uppercase fw-bold">Bienvenue !</h1>
+    </header>
+
+    <div class="mb-5 pb-md-5">
+        <p>Cette application, est comme son nom l'indique : un dictionnaire Japonais de kanji ( dico-nais ).</p>
+        <p>Chaque kanji contenu dans ce dictionnaire aura comme information :</p>
+        <ul>
+            <li>sa signification</li>
+            <li>ses différentes lectures : ON et kun</li>
+            <li>le nombre de traits</li>
+            <li>la <a href="https://cours-de-japonais.com/cles-kanji-japonais/" target="_blank">clé</a> du kanji</li>
+            <li>une image représentant le kanji avec <a href="https://cours-de-japonais.com/ordre-traits-kanji/" target="_blank">l'ordre des traits</a> pour le tracé</li>
+            <li>le niveau <a href="https://www.kanpai.fr/apprendre-japonais/jlpt-passer-test-japonais-n1-n5" target="_blank">JLPT</a> asscocié</li>
+        </ul> 
+    </div>
+
+    <section class="mb-5 pb-md-5">
+        <header class="mb-3">
+            <h2 class="text-secondary text-uppercase h3 fw-bold">Exemple de kanji</h2>
+        </header>
+
+        <div class="card flex-sm-row overflow-hidden">
+            <header class="col-sm-4 col-md-3">
+                <img class="img-fluid" src="{{ asset('uploads/home.png') }}" alt="kanji de la montagne">
+            </header>
+
+            <div class="card-body m-sm-auto">
+                <h3 class="h4">Montagne</h3>
+                <p class="mb-0"><span class="fw-bold">Lecture ON</span> : サン ( SAN ) / セン ( SEN )</p>
+                <p class="mb-0"><span class="fw-bold">Lecture kun</span> : やま ( yama )</p>
+                <p class="mb-0"><span class="fw-bold">Nombre de traits</span> : 3</p>
+                <p class="mb-0"><span class="fw-bold">Niveau JLPT</span> : 5</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="mb-5 pb-md-5">
+        <header class="mb-3">
+            <h2 class="text-secondary text-uppercase h3 fw-bold">Derniers kanji ajoutés</h2>
+        </header>
+    </section>
+</section>
+{% endblock %}

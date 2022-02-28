@@ -26,6 +26,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[UniqueEntity('logo')]
 abstract class Ideogramme
 {
+    const LAST_KANJI = 6;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]

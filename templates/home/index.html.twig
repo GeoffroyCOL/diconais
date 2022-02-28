@@ -9,16 +9,22 @@
     </header>
 
     <div class="mb-5 pb-md-5">
-        <p>Cette application, est comme son nom l'indique : un dictionnaire Japonais de kanji ( dico-nais ).</p>
-        <p>Chaque kanji contenu dans ce dictionnaire aura comme information :</p>
-        <ul>
+        <p>Cette application, est comme son nom l'indique : un <span class="fw-bold text-primary">dic</span>ti<span class="fw-bold text-primary">o</span>nnaire Japo<span class="fw-bold text-primary">nais</span> de <strong>kanji</strong> ( dico-nais ).</p>
+        <p class="mb-0">Chaque <strong>kanji</strong> contenu dans ce dictionnaire aura comme information :</p>
+        <ul class="mb-4">
             <li>sa signification</li>
             <li>ses différentes lectures : ON et kun</li>
             <li>le nombre de traits</li>
             <li>la <a href="https://cours-de-japonais.com/cles-kanji-japonais/" target="_blank">clé</a> du kanji</li>
             <li>une image représentant le kanji avec <a href="https://cours-de-japonais.com/ordre-traits-kanji/" target="_blank">l'ordre des traits</a> pour le tracé</li>
             <li>le niveau <a href="https://www.kanpai.fr/apprendre-japonais/jlpt-passer-test-japonais-n1-n5" target="_blank">JLPT</a> asscocié</li>
-        </ul> 
+        </ul>
+
+        <p class="mb-0">Vous pourrez également retrouver sur les différents <strong>kanji</strong> : </p>
+        <ul>
+            <li>Une liste de kanji similaire</li>
+            <li>Une liste d'exemple de mot avec ce kanji</li>
+        </ul>
     </div>
 
     <section class="mb-5 pb-md-5">
@@ -45,6 +51,14 @@
         <header class="mb-3">
             <h2 class="text-secondary text-uppercase h3 fw-bold">Derniers kanji ajoutés</h2>
         </header>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+            {% for kanji in kanjis %}
+                <div class="col-12 col-md-6 col-lg-4 mb-3">
+                    {% include 'composants/_card-list-kanji.html.twig' with { 'entity': kanji } %}
+                </div>
+            {% endfor %}
+        </div>
     </section>
 </section>
 {% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Kanji | {{ parent() }}{% endblock %}
+
+{% block body %}
+    <section class="py-md-5">
+        <div class="row">
+            <header class="col-4">
+                <img class="img-fluid" src="{{ asset('uploads/ideogrammes/' ~ ideogramme.image.path) }}" alt="{{ ideogramme.image.alt }}">
+            </header>
+
+            <div class="col-8 m-auto">
+                <p class="mb-1"><span class="fw-bold">Lecture ON : </span>{{ ideogramme.readOn }}</p>
+                <p class="mb-1"><span class="fw-bold">Lecture Kun : </span>{{ ideogramme.kun }}</p>
+                <p class="mb-1"><span class="fw-bold">Nombre de traits : </span>{{ ideogramme.stroke }}</p>
+                <p class="mb-1"><span class="fw-bold">Nivea JLPT : </span>{{ ideogramme.jlpt }}</p>
+                {% if ideogramme.kanjiKey is defined %}
+                    <p class="mb-1"><span class="fw-bold">Clé asscoiée : </span> <a href="{{ path('ideogramme.show', {id: ideogramme.kanjiKey.id}) }}">{{ ideogramme.kanjiKey.logo }}</a></p>
+                    {% else %}<p class="mb-1"><span class="fw-bold">Clé : </span> {{ ideogramme.logo }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <section class="py-md-5">
+        <header class="mb-3">
+            <h2 class="text-secondary text-uppercase h4 fw-bold">Kanji similaires</h2>
+        </header>
+        <div class="row">
+            {% for s in ideogramme.similars %}
+                <div class="col-12 col-md-6 mb-3">
+                    {% include 'composants/_card-list-kanji.html.twig' with { 'entity': s } %}
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section>
+        <header class="mb-3">
+            <h2 class="text-secondary text-uppercase h4 fw-bold">Exemples de mots</h2>
+        </header>
+
+        <ul>
+            {% for ex in ideogramme.examples %}
+            <li>{{ ex }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}

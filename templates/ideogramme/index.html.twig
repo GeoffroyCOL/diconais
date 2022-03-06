@@ -2,16 +2,17 @@
 
 {% block title %}Histoire des kanji | {{ parent() }}{% endblock %}
 
+{% block meta %}
+    {{ parent() }}
+    <meta name="description" content="Les kanji sont des idéogrammes, qui représentent une idée. Ce sont des ensembles de traits tracés dans un ordre et un sens précis, ayant plusieurs significations et prononciations.">
+{% endblock %}
+
 {% block body %}
 
 <section class="py-md-5">
-    <header class="mb-3">
-        <h1 class="text-primary text-uppercase fw-bold">Histoire</h1>
-    </header>
-
     <section class="mb-5 pb-md-5">
         <header class="mb-3">
-            <h2 class="text-secondary text-uppercase h3 fw-bold">C'est quoi un kanji</h2>
+            <h2 class="text-secondary text-uppercase h3 fw-bold">qu'est ce qu'un kanji ?</h2>
         </header>
 
         <div>

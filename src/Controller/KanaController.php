@@ -13,6 +13,7 @@ class KanaController extends AbstractController
     {
         return $this->render('kana/index.html.twig', [
             'current_page' => 'kana',
+            'page_title' => 'Les kana'
         ]);
     }
 }

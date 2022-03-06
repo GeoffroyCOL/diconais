@@ -7,15 +7,31 @@ $body-color: #4f4f4f;
 $primary: #008E9B;
 $secondary: #0087AF;
 $link-color: #FF8C40;
+$box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
 
 //Border
 $border-radius: 0.5rem;
 
 //card
 .card-hover:hover {
-    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    box-shadow: $box-shadow;
 }
 
 .card-hover{
     transition: 0.3s;
+}
+
+//Pagination
+$pagination-border-width: 0;
+$pagination-color: $body-color;
+$pagination-hover-color: $body-color;
+$pagination-focus-color: $body-color;
+$pagination-border-radius: 0;
+$pagination-padding-y: 0.225rem;
+$pagination-padding-x: 0.75rem;
+$pagination-focus-box-shadow: $box-shadow;
+
+.page-item.active .page-link {
+    border-radius: 0.25rem;
+    box-shadow: $box-shadow;
 }

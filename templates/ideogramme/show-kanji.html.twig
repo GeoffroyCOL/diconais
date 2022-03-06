@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Kanji | {{ parent() }}{% endblock %}
+
+{% block body %}
+    {# Image + texte #}
+    <section class="py-5">
+        <div class="row border rounded">
+            <header class="col-4">
+                <img class="img-fluid" src="{{ asset('uploads/ideogrammes/' ~ ideogramme.image.path) }}" alt="{{ ideogramme.image.alt }}">
+            </header>
+
+            <div class="col-8 m-auto">
+                <p class="mb-1"><span class="fw-bold">Lecture ON : </span>{{ ideogramme.readOn }}</p>
+                <p class="mb-1"><span class="fw-bold">Lecture Kun : </span>{{ ideogramme.kun }}</p>
+                <p class="mb-1"><span class="fw-bold">Nombre de traits : </span>{{ ideogramme.stroke }}</p>
+                <p class="mb-1"><span class="fw-bold">Niveau JLPT : </span>{{ ideogramme.jlpt }}</p>
+                {% if ideogramme.kanjiKey is defined %}
+                    <p class="mb-1"><span class="fw-bold">Clé asscoiée : </span> <a href="{{ path('ideogramme.show', {id: ideogramme.kanjiKey.id}) }}">{{ ideogramme.kanjiKey.logo }}</a></p>
+                    {% else %}<p class="mb-1"><span class="fw-bold">Clé : </span> {{ ideogramme.logo }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    {# Image + texte #}
+
+    {# Kanji similaire #}
+    {% if ideogramme.similars is not empty %}
+    <section class="py-5">
+        <header class="mb-3">
+            <h2 class="text-secondary text-uppercase h4 fw-bold">Kanji similaires</h2>
+        </header>
+        <div class="row">
+            {% for s in ideogramme.similars %}
+                <div class="col-12 col-md-6 mb-3">
+                    {% include 'composants/_card-list-kanji.html.twig' with { 'entity': s } %}
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+    {# Kanji similaire #}
+
+    {# Exemple de mots avec le kanji #}
+    {% if ideogramme.examples is not empty %}
+    <section class="py-5">
+        <header class="mb-3">
+            <h2 class="text-secondary text-uppercase h4 fw-bold">Exemples de mots</h2>
+        </header>
+
+        <table class="table">
+            <tbody>
+                {% for ex in ideogramme.examples %}
+                    <tr><td>{{ ex }}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+    {% endif %}
+    {# Exemple de mots avec le kanji #}
+{% endblock %}

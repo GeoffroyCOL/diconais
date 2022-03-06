@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+
+    <div class="row">
+        {{ form_row(form.signification) }}
+        {{ form_row(form.stroke) }}
+        {{ form_row(form.jlpt) }}
+    </div>
+
+    <button type="submit" class="btn btn-sm btn-secondary text-ippercase text-white fw-bold">Rechercher</button>
+
+{{ form_end(form) }}

@@ -75,7 +75,7 @@ abstract class Ideogramme
     /**
      * L'image du kanji avec la numérotation des traits
      */
-    #[ORM\OneToOne(targetEntity: Image::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(targetEntity: Image::class, cascade: ['persist', 'remove'], fetch: "EAGER")]
     #[ORM\JoinColumn(nullable: false)]
     #[UploaderField(propertyName: 'path')]
     #[Assert\Valid]

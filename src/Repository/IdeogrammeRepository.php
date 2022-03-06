@@ -2,9 +2,12 @@
 
 namespace App\Repository;
 
+use App\Data\FilterData;
 use App\Entity\Ideogramme;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Ideogramme|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,37 +17,43 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class IdeogrammeRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, private PaginatorInterface $paginator)
     {
         parent::__construct($registry, Ideogramme::class);
     }
-
-    // /**
-    //  * @return Ideogramme[] Returns an array of Ideogramme objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    
+    /**
+     * findSearch
+     *
+     * @param  FilterData $search
+     * @return PaginationInterface
+     */
+    public function findSearch(FilterData $search): PaginationInterface
     {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('i.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $query = $this->createQueryBuilder('i');
 
-    /*
-    public function findOneBySomeField($value): ?Ideogramme
-    {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        if (!empty($search->signification)) {
+            $query = $query
+                ->andWhere('i.signification LIKE :q')
+                ->setParameter('q', "%{$search->signification}%");
+        }
+
+        if (!empty($search->stroke)) {
+            $query = $query
+                ->andWhere('i.stroke = :stroke')
+                ->setParameter('stroke', $search->stroke);
+        }
+
+        if (!empty($search->jlpt)) {
+            $query = $query
+                ->andWhere('i.jlpt = :jlpt')
+                ->setParameter('jlpt', $search->jlpt);
+        }
+
+        return $this->paginator->paginate(
+            $query,
+            $search->page,
+            9
+        );
     }
-    */
 }

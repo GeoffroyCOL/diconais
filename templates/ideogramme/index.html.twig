@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Histoire des kanji | {{ parent() }}{% endblock %}
+
+{% block body %}
+
+<section class="py-md-5">
+    <header class="mb-3">
+        <h1 class="text-primary text-uppercase fw-bold">Histoire</h1>
+    </header>
+
+    <section class="mb-5 pb-md-5">
+        <header class="mb-3">
+            <h2 class="text-secondary text-uppercase h3 fw-bold">C'est quoi un kanji</h2>
+        </header>
+
+        <div>
+            <p>
+                Les <strong>kanji</strong> sont des idéogrammes, qui représentent une idée.<br>
+                Ce sont des ensembles de traits tracés dans un ordre et un sens précis, ayant plusieurs significations et prononciations.
+            </p>
+
+            <p class="mb-0">Chaque kanji peut avoir plusieurs lectures qui sont :</p>
+            <ul>
+                <li><span class="fw-bold">Onyomi</span> (音読み) qui peut être également appelé lecture sino-japonaise.</li>
+                <li><span class="fw-bold">Kunyomi</span> (訓読み) qui peut être appelé lecture purement japonaise.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="mb-5 pb-md-5">
+        <header class="mb-3">
+            <h2 class="text-secondary text-uppercase h3 fw-bold">L'origine des kanji</h2>
+        </header>
+
+        <div>
+            <p>Le japonais était une langue uniquement orale et n'avait pas de support écrit.</p>
+            <p>Vers la fin du IVe siècle, début du Ve siècle de notre ère, des Chinois débarquent au Japon. <br>
+            Ils amènent avec eux leur système d'écriture, leurs idéogrammes.</p>
+
+            <p>Les Japonais ont saisi cette opportunité pour commencer à les utiliser.</p>
+
+        </div>
+    </section>
+
+    <section>
+        <header class="mb-3">
+            <h3 class="text-secondary text-uppercase h5 fw-bold">Les sources</h3>
+        </header>
+
+        <div>
+            <div class="card p-3 mb-4">
+                <h4 class="h6 fw-bold">Sophie Thomas</h4>
+                <ul class="list-group border-0">
+                    <li class="list-group-item border-0 pb-0">
+                        <a  class="link-primary text-decoration-none" 
+                            href="https://cours-de-japonais.com/origine-kanji-japonais/" 
+                            target="_blank">L’Origine des Kanji Japonais
+                        </a>
+                    </li>
+                    <li class="list-group-item border-0 pb-0">
+                        <a  class="link-primary text-decoration-none" 
+                            href="https://cours-de-japonais.com/ordre-traits-kanji/" 
+                            target="_blank">L’Ordre Des Traits Dans Les Kanji Japonais
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card p-3 mb-4">
+                <h4 class="h6 fw-bold">Le site Japon-fr</h4>
+                <ul class="list-group border-0">
+                    <li class="list-group-item border-0 pb-0">
+                        <a  class="link-primary text-decoration-none" 
+                            href="https://japon-fr.com/origines-du-systeme-ecriture-japonais.htm" 
+                            target="_blank">Les origines du système d'écriture japonais
+                        </a>
+                    </li>
+                </ul>
+            </div> 
+
+            <div class="card p-3">
+                <h4 class="h6 fw-bold">Julien Fontanier</h4>
+                <ul class="list-group border-0">
+                    <li class="list-group-item border-0 pb-0">
+                        <a  class="link-primary text-decoration-none" 
+                            href="https://www.youtube.com/watch?v=7NSKt_SSi5E" 
+                            target="_blank">Présentation des kanji
+                        </a>
+                    </li>
+                    <li class="list-group-item border-0 pb-0">
+                        <a  class="link-primary text-decoration-none" 
+                            href="https://www.youtube.com/watch?v=Ysp5CEYFyiQ" 
+                            target="_blank">Bien tracer et apprendre les kanji
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</section>
+{% endblock %}

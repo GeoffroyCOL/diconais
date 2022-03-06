@@ -17,7 +17,8 @@ class HomeController extends AbstractController
     public function index(): Response
     {
         return $this->render('home/index.html.twig', [
-            'kanjis' => $this->ideogrammeReadHandler->getLastKanji(Ideogramme::LAST_KANJI)
+            'kanjis' => $this->ideogrammeReadHandler->getLastKanji(Ideogramme::LAST_KANJI),
+            'page_title' => 'Diconais'
         ]);
     }
 }

@@ -16,10 +16,13 @@ class IdeogrammeController extends AbstractController
     public function __construct(private IdeogrammeReadHandler $ideogrammeReadHandler)
     {}
 
-    #[Route('/histoire', name: 'ideogramme')]
+    #[Route('/histoire', name: 'ideogramme.history')]
     public function index(): Response
     {
-        return $this->render('ideogramme/index.html.twig');
+        return $this->render('ideogramme/index.html.twig', [
+            'current_page' => 'histoire',
+            'page_title' => 'Histoire'
+        ]);
     }
 
     #[Route('/les-kanji', name: 'ideogramme.list')]
@@ -35,7 +38,9 @@ class IdeogrammeController extends AbstractController
 
         return $this->renderForm('ideogramme/list-kanji.html.twig', [
             'ideogrammes' => $ideogrammes,
-            'form' => $form
+            'form' => $form,
+            'current_page' => 'kanji',
+            'page_title' => 'Les kanji'
         ]);
     }
 
@@ -43,7 +48,10 @@ class IdeogrammeController extends AbstractController
     public function showKanji(Ideogramme $ideogramme): Response
     {
         return $this->render('ideogramme/show-kanji.html.twig', [
-            'ideogramme' => $ideogramme
+            'ideogramme' => $ideogramme,
+            'current_page' => 'kanji',
+            'logo' => $ideogramme->getLogo(),
+            'signification' => $ideogramme->getSignification()
         ]);
     }
 }

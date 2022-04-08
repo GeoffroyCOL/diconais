@@ -3,7 +3,6 @@
 /**
  * Récupère les informations des idéogrammes
  */
-
 namespace App\Handler;
 
 use App\Data\FilterData;
@@ -25,7 +24,7 @@ class IdeogrammeReadHandler
      */
     public function getLastKanji(int $number): array
     {
-        return $this->repository->findBy([], [], $number);
+        return $this->repository->findBy([], ['id' => 'DESC'], $number);
     }
     
     /**

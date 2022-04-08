@@ -12,22 +12,25 @@ use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
+use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
+use Symfony\Component\Security\Core\User\UserInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class DashboardController extends AbstractDashboardController
 {
+    public function __construct(private AdminUrlGenerator $adminUrlGenerator)
+    {}
+
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
         /** @var User $user  */
         $user = $this->getUser();
 
-        /** @var AdminUrlGenerator $adminUrlGenerator */
-        $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
         return $this->redirect(
-            $adminUrlGenerator
+            $this->adminUrlGenerator
                 ->setController(ProfileCrudController::class)
                 ->setEntityId($user->getId())
                 ->setAction(Action::DETAIL)
@@ -46,6 +49,8 @@ class DashboardController extends AbstractDashboardController
         return [
             MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
 
+            MenuItem::linkToUrl('Retour vers le site', 'fa fa-reply-all', '/'),
+
             MenuItem::section('Idéogrammes'),
             MenuItem::linkToCrud('La liste complète', 'fa fa-file-text', Ideogramme::class),
 
@@ -57,6 +62,19 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Voir la liste', 'fa fa-file-text', KanjiKey::class),
             MenuItem::linkToCrud('Ajouter', 'fas fa-plus', KanjiKey::class)->setAction(ACTION::NEW),
         ];
+    }
+
+    public function configureUserMenu(UserInterface $user): UserMenu
+    {
+        $url = $this->adminUrlGenerator
+            ->setController(ProfileCrudController::class)
+            ->setEntityId($user->getId()) /** @phpstan-ignore-line */
+            ->setAction(Action::DETAIL)
+        ;
+
+        return parent::configureUserMenu($user)
+            ->setName($user->getUserIdentifier())
+            ->addMenuItems([MenuItem::linkToUrl('Mon profil', 'fa fa-id-card', $url)]);
     }
 
     public function configureCrud(): Crud

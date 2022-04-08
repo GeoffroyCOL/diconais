@@ -36,6 +36,7 @@ class IdeogrammeHandler
         $newListsExamples = $listIdeogrammes->unwrap()->toArray();
 
         foreach($newListsExamples as $key => $value) {
+            /** @var string $value  */
             if ($this->isArrayExamples($value)) {
                 $ideogramme->getExamples()->remove($key);
             } else {

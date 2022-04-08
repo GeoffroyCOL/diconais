@@ -32,7 +32,7 @@ class SecurityControllerTest extends WebTestCase
         $form['_password'] = '0000';
         $crawler = $client->submit($form);
 
-        $this->assertResponseRedirects('/profile', Response::HTTP_FOUND);
+        $this->assertResponseRedirects('/admin', Response::HTTP_FOUND);
     }
     
     /**

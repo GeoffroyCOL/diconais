@@ -5,7 +5,7 @@
 {% block body %}
     {# Image + texte #}
     <section class="py-5">
-        <div class="row border rounded">
+        <div class="d-flex overflow-hidden border rounded py-2">
             <header class="col-4">
                 <img class="img-fluid" src="{{ asset('uploads/ideogrammes/' ~ ideogramme.image.path) }}" alt="{{ ideogramme.image.alt }}">
             </header>
@@ -16,7 +16,7 @@
                 <p class="mb-1"><span class="fw-bold">Nombre de traits : </span>{{ ideogramme.stroke }}</p>
                 <p class="mb-1"><span class="fw-bold">Niveau JLPT : </span>{{ ideogramme.jlpt }}</p>
                 {% if ideogramme.kanjiKey is defined %}
-                    <p class="mb-1"><span class="fw-bold">Clé asscoiée : </span> <a href="{{ path('ideogramme.show', {id: ideogramme.kanjiKey.id}) }}">{{ ideogramme.kanjiKey.logo }}</a></p>
+                    <p class="mb-1"><span class="fw-bold">Clé associée : </span> <a class="text-decoration-none" href="{{ path('ideogramme.show', {id: ideogramme.kanjiKey.id}) }}">{{ ideogramme.kanjiKey.logo }}</a></p>
                     {% else %}<p class="mb-1"><span class="fw-bold">Clé : </span> {{ ideogramme.logo }}</p>
                 {% endif %}
             </div>
